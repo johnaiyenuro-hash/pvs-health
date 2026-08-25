@@ -24,18 +24,15 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--ink); min-height: 100vh; line-height: 1.5; }
 
-  /* Layout */
   .hero { padding: 40px 24px 28px; max-width: 800px; margin: 0 auto; }
   .hero-eyebrow { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 10px; }
   .hero h1 { font-family: 'Syne', sans-serif; font-size: clamp(32px, 8vw, 56px); font-weight: 800; line-height: 0.9; margin-bottom: 16px; }
   .hero h1 span { color: var(--accent); }
-  .hero-sub { font-size: 15px; color: var(--ink2); max-width: 520px; }
 
   .tabs-wrap { max-width: 800px; margin: 0 auto; padding: 0 24px; position: sticky; top: 0; background: var(--bg); z-index: 100; padding-top: 10px; }
   .tabs { display: flex; gap: 8px; margin-bottom: 24px; overflow-x: auto; padding-bottom: 8px; scrollbar-width: none; }
   .tabs::-webkit-scrollbar { display: none; }
-  
-  .tab { padding: 10px 20px; border-radius: 40px; border: 1.5px solid var(--border); font-size: 13px; cursor: pointer; background: white; font-weight: 600; transition: all 0.2s; white-space: nowrap; }
+  .tab { padding: 10px 20px; border-radius: 40px; border: 1.5px solid var(--border); font-size: 13px; cursor: pointer; background: white; font-weight: 600; transition: 0.2s; white-space: nowrap; }
   .tab.active { background: var(--ink); color: white; border-color: var(--ink); }
 
   .content { max-width: 800px; margin: 0 auto; padding: 0 24px 80px; }
@@ -46,54 +43,57 @@
   .card { background: white; border-radius: 20px; border: 1.5px solid var(--border); padding: 24px; margin-bottom: 20px; }
   .card h3 { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 700; margin-bottom: 16px; }
 
-  /* Nutrition & Macro Styles */
-  .macro-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px; }
-  .macro-box { text-align: center; padding: 16px; border-radius: 16px; border: 1.5px solid var(--border); }
-  .macro-val { font-family: 'Syne', sans-serif; font-size: 24px; font-weight: 800; }
-  .macro-label { font-size: 11px; text-transform: uppercase; font-weight: 700; color: var(--ink3); letter-spacing: 1px; }
+  /* Meal Randomizer */
+  .shuffle-container { display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px; }
+  .btn-shuffle { background: var(--ink); color: white; border: none; padding: 8px 14px; border-radius: 30px; font-size: 11px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 6px; }
+  .meal-display { min-height: 120px; transition: all 0.3s ease; }
+
+  /* Photo Upload & Log */
+  .weight-input-group { display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px; }
+  .file-input-wrapper { position: relative; width: 100%; }
+  .file-label { display: block; padding: 12px; background: #fff; border: 1.5px dashed var(--ink3); border-radius: 10px; text-align: center; font-size: 13px; cursor: pointer; color: var(--ink2); }
+  input[type="file"] { position: absolute; opacity: 0; width: 1px; }
+  input[type="number"] { padding: 12px; border-radius: 10px; border: 1.5px solid var(--border); width: 100%; font-family: inherit; }
+  .btn-add { background: var(--accent); color: white; border: none; padding: 14px; border-radius: 10px; font-weight: 800; cursor: pointer; }
   
-  .meal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  @media (max-width: 500px) { .meal-grid { grid-template-columns: 1fr; } }
-  .meal-item { background: #fafaf9; border-radius: 14px; padding: 16px; border: 1px solid var(--border); }
-  .meal-cat { font-size: 10px; font-weight: 800; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
-  .meal-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 15px; margin-bottom: 8px; }
-  .macro-tags { display: flex; gap: 6px; }
+  .log-item { display: grid; grid-template-columns: 60px 1fr auto; align-items: center; gap: 15px; padding: 15px 0; border-bottom: 1px solid var(--border); }
+  .log-img { width: 60px; height: 60px; border-radius: 8px; object-fit: cover; background: #eee; cursor: pointer; border: 1px solid var(--border); }
+  .log-info { display: flex; flex-direction: column; }
+  .log-date { font-size: 11px; color: var(--ink3); text-transform: uppercase; letter-spacing: 0.5px; }
+  .log-weight { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 18px; }
+
+  /* Modal for Big Photos */
+  .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 1000; padding: 20px; justify-content: center; align-items: center; }
+  .modal img { max-width: 100%; max-height: 80vh; border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+  .modal-close { position: absolute; top: 20px; right: 20px; color: white; font-size: 30px; cursor: pointer; }
+
+  /* Progress Styles */
+  .progress-bar { height: 8px; background: var(--border); border-radius: 10px; margin: 10px 0; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--accent3); width: 0%; transition: 0.4s; }
+  
   .tag { font-size: 9px; font-weight: 700; padding: 2px 8px; border-radius: 4px; }
   .tag.p { background: var(--tag-p); color: var(--tag-p-fg); }
   .tag.c { background: var(--tag-c); color: var(--tag-c-fg); }
-  .tag.f { background: var(--tag-f); color: var(--tag-f-fg); }
-
-  /* Previous Styles preserved... */
-  .day-card { background: white; border-radius: 16px; border: 1.5px solid var(--border); margin-bottom: 12px; overflow: hidden; }
-  .day-header { padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; }
-  .day-body { display: none; padding: 0 20px 20px; border-top: 1px solid var(--border); background: #fafaf9; }
-  .day-body.open { display: block; }
-  .ex-list { list-style: none; margin-top: 10px; font-size: 13px; }
-  .pu-row { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
-  .pu-cell { aspect-ratio: 1; background: white; border: 1.5px solid var(--border); border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; }
-  .pu-cell.done { background: var(--ink); color: white; }
-  .progress-bar { height: 8px; background: var(--border); border-radius: 10px; margin: 10px 0; overflow: hidden; }
-  .progress-fill { height: 100%; background: var(--accent3); width: 0%; transition: 0.4s; }
-  .weight-input-group { display: flex; gap: 10px; margin-bottom: 20px; }
-  input { padding: 12px; border-radius: 10px; border: 1.5px solid var(--border); width: 100%; }
-  .btn-add { background: var(--ink); color: white; border: none; padding: 0 20px; border-radius: 10px; font-weight: 600; }
 </style>
 </head>
 <body>
 
+<div id="photoModal" class="modal" onclick="this.style.display='none'">
+  <span class="modal-close">&times;</span>
+  <img id="modalImg" src="">
+</div>
+
 <div class="hero">
   <div class="hero-eyebrow">Vision 2026</div>
-  <h1>Level Up<br><span>Fitness</span></h1>
-  <p class="hero-sub">Fat Loss Strategy: 500kcal Deficit + Protein Focus</p>
+  <h1>Fat to <span>Slim</span></h1>
 </div>
 
 <div class="tabs-wrap">
   <div class="tabs">
-    <div class="tab active" onclick="showTab('dashboard', this)">Dashboard</div>
-    <div class="tab" onclick="showTab('nutrition', this)">Nutrition</div>
-    <div class="tab" onclick="showTab('workout', this)">Workout</div>
+    <div class="tab active" onclick="showTab('dashboard', this)">Progress</div>
+    <div class="tab" onclick="showTab('nutrition', this)">Meal Ideas</div>
     <div class="tab" onclick="showTab('pushups', this)">Push-Ups</div>
-    <div class="tab" onclick="showTab('log', this)">Weight Log</div>
+    <div class="tab" onclick="showTab('log', this)">Mirror Log</div>
   </div>
 </div>
 
@@ -104,107 +104,79 @@
     <div class="card">
       <h3>🎯 10kg Progress</h3>
       <div class="progress-bar"><div class="progress-fill" id="weightProgress"></div></div>
-      <p id="weightStatus" style="font-size: 13px; color: var(--ink2);">Log your weight to start tracking.</p>
+      <p id="weightStatus" style="font-size: 13px; color: var(--ink2);">Logging weight will update this.</p>
     </div>
-    <div class="card" style="background: var(--ink); color: white; border: none;">
-      <h3 style="color: white; margin-bottom: 8px;">Quick Rule of Thumb</h3>
-      <p style="font-size: 14px; opacity: 0.9;">Eat 1.6g of protein per kg of bodyweight. If you weigh 80kg, aim for ~130g protein daily.</p>
+    <div id="latestPhotoPreview" class="card" style="padding: 10px; display: none; text-align: center;">
+        <p style="font-size: 11px; font-weight: 800; text-transform: uppercase; margin-bottom: 10px;">Latest Transformation Photo</p>
+        <img id="dashImg" style="width: 100%; border-radius: 12px;">
     </div>
   </div>
 
-  <!-- NUTRITION -->
+  <!-- NUTRITION / MEAL RANDOMIZER -->
   <div class="panel" id="nutrition">
-    <div class="macro-container">
-      <div class="macro-box" style="border-color: var(--tag-p-fg);">
-        <div class="macro-label">Protein</div>
-        <div class="macro-val" style="color: var(--tag-p-fg);">40%</div>
+    <div class="card">
+      <div class="shuffle-container">
+        <h3>🥗 Meal Randomizer</h3>
+        <button class="btn-shuffle" onclick="randomizeAll()">🎲 Shuffle All</button>
       </div>
-      <div class="macro-box" style="border-color: var(--tag-c-fg);">
-        <div class="macro-label">Carbs</div>
-        <div class="macro-val" style="color: var(--tag-c-fg);">35%</div>
-      </div>
-      <div class="macro-box" style="border-color: var(--tag-f-fg);">
-        <div class="macro-label">Fats</div>
-        <div class="macro-val" style="color: var(--tag-f-fg);">25%</div>
+      
+      <div id="mealList">
+        <!-- JS generates meal slots here -->
       </div>
     </div>
-
-    <div class="meal-grid">
-      <div class="meal-item">
-        <div class="meal-cat">Breakfast</div>
-        <div class="meal-name">Protein Power Oats</div>
-        <p style="font-size: 12px; color: var(--ink2); margin-bottom: 10px;">Oats, scoop of whey, 1tbsp peanut butter, berries.</p>
-        <div class="macro-tags">
-          <span class="tag p">High P</span><span class="tag c">Complex C</span>
-        </div>
-      </div>
-      <div class="meal-item">
-        <div class="meal-cat">Lunch</div>
-        <div class="meal-name">Quinoa Chicken Bowl</div>
-        <p style="font-size: 12px; color: var(--ink2); margin-bottom: 10px;">Grilled chicken, quinoa, spinach, cucumber, feta.</p>
-        <div class="macro-tags">
-          <span class="tag p">35g P</span><span class="tag f">Healthy F</span>
-        </div>
-      </div>
-      <div class="meal-item">
-        <div class="meal-cat">Dinner</div>
-        <div class="meal-name">Salmon & Greens</div>
-        <p style="font-size: 12px; color: var(--ink2); margin-bottom: 10px;">Baked salmon, roasted broccoli, half sweet potato.</p>
-        <div class="macro-tags">
-          <span class="tag p">Lean P</span><span class="tag f">Omega 3</span>
-        </div>
-      </div>
-      <div class="meal-item">
-        <div class="meal-cat">Snack</div>
-        <div class="meal-name">Greek Yogurt Mix</div>
-        <p style="font-size: 12px; color: var(--ink2); margin-bottom: 10px;">0% Greek yogurt, 10 almonds, cinnamon.</p>
-        <div class="macro-tags">
-          <span class="tag p">20g P</span><span class="tag f">Low Cal</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- WORKOUTS -->
-  <div class="panel" id="workout">
-    <div id="workoutList"></div>
   </div>
 
   <!-- PUSH-UPS -->
   <div class="panel" id="pushups">
-    <div class="card">
-      <h3>💪 Push-Up Challenge</h3>
-      <div id="puGrid"></div>
-    </div>
+    <div class="card"><h3>💪 Push-Up Challenge</h3><div id="puGrid" style="display:grid; grid-template-columns:repeat(7, 1fr); gap:6px;"></div></div>
   </div>
 
-  <!-- WEIGHT LOG -->
+  <!-- MIRROR LOG / WEIGHT LOG -->
   <div class="panel" id="log">
     <div class="card">
-      <h3>⚖️ Weight Log</h3>
+      <h3>⚖️ Weight & Selfie</h3>
       <div class="weight-input-group">
         <input type="number" id="weightInput" step="0.1" placeholder="Current weight (kg)">
-        <button class="btn-add" onclick="addWeight()">Add</button>
+        <div class="file-input-wrapper">
+          <label for="photoInput" class="file-label" id="fileLabel">📸 Add Mirror Selfie</label>
+          <input type="file" id="photoInput" accept="image/*" onchange="handleFile(this)">
+        </div>
+        <button class="btn-add" onclick="saveEntry()">SAVE WEEKLY LOG</button>
       </div>
-      <ul id="weightList" style="list-style:none;"></ul>
+
+      <div id="logHistory"></div>
+      <button onclick="resetAllData()" style="margin-top:40px; border:none; background:none; color:var(--ink3); font-size:10px; text-decoration:underline; cursor:pointer;">Reset all data</button>
     </div>
   </div>
 
 </div>
 
 <script>
-// Same logic as before with minor updates for new tab
-const workouts = [
-  { day: "Monday", focus: "Upper Body", ex: ["Push-ups: 3x15", "Bag Rows: 3x12", "Bench Dips: 3x12", "Plank: 3x60s"] },
-  { day: "Tuesday", focus: "Legs + Run", ex: ["Squats: 3x20", "Lunges: 3x12/side", "Calf Raises: 3x20", "2km Steady Run"] },
-  { day: "Wednesday", focus: "Core + HIIT", ex: ["Russian Twists: 3x20", "Mountain Climbers: 4x45s", "Leg Raises: 3x12", "Burpees: 3x10"] },
-  { day: "Thursday", focus: "Push + Shoulders", ex: ["Pike Push-ups: 3x10", "Shoulder Taps: 3x20", "Diamond Push-ups: 3xMax", "2km Run (Optional)"] },
-  { day: "Friday", focus: "Full Body", ex: ["Squat to Press: 3x15", "Bicep Curls (Bag): 3x12", "High Knees: 4x45s", "Superman: 3x12"] },
-  { day: "Saturday", focus: "Active Recovery", ex: ["6k Walk", "Long Stretch Session", "Hip Mobility Drills"] },
-  { day: "Sunday", focus: "Rest & Prep", ex: ["Meal Prep for Week", "Check Calorie Logs", "Relax"] }
-];
+// MEAL DATA POOL
+const meals = {
+  breakfast: [
+    { name: "Protein Power Oats", desc: "Oats, whey, peanut butter, berries.", tags: ["40g P", "Complex C"] },
+    { name: "Egg White Scramble", desc: "3 whites, 1 whole egg, spinach, feta, 1 slice rye toast.", tags: ["30g P", "Fiber"] },
+    { name: "Greek Yogurt Parfait", desc: "0% Yogurt, chia seeds, walnuts, cinnamon.", tags: ["25g P", "Healthy Fats"] },
+    { name: "Avocado & Salmon Toast", desc: "Smoked salmon, 1/4 avocado, chili flakes.", tags: ["20g P", "Omega 3"] }
+  ],
+  lunch: [
+    { name: "Quinoa Chicken Bowl", desc: "Grilled chicken, quinoa, cucumber, lemon tahini.", tags: ["35g P", "Balanced"] },
+    { name: "Tuna Salad Wrap", desc: "Tuna, greek yogurt (instead of mayo), celery, lettuce.", tags: ["40g P", "Low Cal"] },
+    { name: "Beef & Broccoli Stir Fry", desc: "Lean beef strips, broccoli, ginger, cauliflower rice.", tags: ["30g P", "Low Carb"] },
+    { name: "Turkey & Apple Salad", desc: "Turkey breast, green apples, walnuts, balsamic.", tags: ["32g P", "Crunchy"] }
+  ],
+  dinner: [
+    { name: "Baked Salmon & Asparagus", desc: "Salmon fillet, asparagus, lemon, small potato.", tags: ["30g P", "Vitamin D"] },
+    { name: "Pesto Zucchini Noodles", desc: "Zoodles, grilled chicken, cherry tomatoes, pesto.", tags: ["35g P", "Veggies"] },
+    { name: "Lean Turkey Chili", desc: "Ground turkey, kidney beans, peppers, onions.", tags: ["40g P", "Filling"] },
+    { name: "Steak & Sweet Potato", desc: "Lean sirloin, mashed sweet potato, green beans.", tags: ["35g P", "Zinc"] }
+  ]
+};
 
-const puSchedule = [10,12,15,0,18,20,22,0,25,28,30,0,32,35,40,0,45,50,55,60,75];
+// UI STATE
+let weightLogs = JSON.parse(localStorage.getItem('v26_logs') || '[]');
+let currentPhotoBase64 = "";
 
 function showTab(id, el) {
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
@@ -213,61 +185,143 @@ function showTab(id, el) {
   el.classList.add('active');
 }
 
-// Render Workouts
-const workoutList = document.getElementById('workoutList');
-workouts.forEach((w, i) => {
-  workoutList.innerHTML += `
-    <div class="day-card">
-      <div class="day-header" onclick="this.nextElementSibling.classList.toggle('open')">
-        <div><div style="font-weight:700;">${w.day}</div><div style="font-size:12px;color:var(--accent);">${w.focus}</div></div>
-        <span>▼</span>
+// RANDOMIZER LOGIC
+function randomizeAll() {
+  const container = document.getElementById('mealList');
+  container.innerHTML = '';
+  ['breakfast', 'lunch', 'dinner'].forEach(cat => {
+    const pool = meals[cat];
+    const item = pool[Math.floor(Math.random() * pool.length)];
+    container.innerHTML += `
+      <div class="meal-display" style="margin-bottom:20px; padding:15px; background:#fafaf9; border-radius:12px; border-left:4px solid var(--accent);">
+        <div style="font-size:10px; font-weight:800; text-transform:uppercase; color:var(--ink3);">${cat}</div>
+        <div style="font-family:'Syne', sans-serif; font-weight:700; font-size:16px;">${item.name}</div>
+        <p style="font-size:12px; color:var(--ink2); margin:4px 0 8px;">${item.desc}</p>
+        <div style="display:flex; gap:5px;">${item.tags.map(t => `<span class="tag p">${t}</span>`).join('')}</div>
       </div>
-      <div class="day-body"><ul class="ex-list">${w.ex.map(e => `<li>${e}</li>`).join('')}</ul></div>
-    </div>`;
-});
+    `;
+  });
+}
 
-// Push-ups
+// PHOTO HANDLING (with Compression)
+function handleFile(input) {
+  const file = input.files[0];
+  if (!file) return;
+  document.getElementById('fileLabel').textContent = "✅ Photo Ready";
+  
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      const MAX_WIDTH = 400; // Keep file size small for localStorage
+      const scale = MAX_WIDTH / img.width;
+      canvas.width = MAX_WIDTH;
+      canvas.height = img.height * scale;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      currentPhotoBase64 = canvas.toDataURL('image/jpeg', 0.7); // 70% quality
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+// LOGGING LOGIC
+function saveEntry() {
+  const wInput = document.getElementById('weightInput');
+  if (!wInput.value) { alert("Enter weight!"); return; }
+  
+  const newEntry = {
+    date: new Date().toLocaleDateString('en-GB', { day:'numeric', month:'short' }),
+    kg: parseFloat(wInput.value),
+    img: currentPhotoBase64
+  };
+  
+  weightLogs.unshift(newEntry);
+  localStorage.setItem('v26_logs', JSON.stringify(weightLogs));
+  
+  // Reset
+  wInput.value = '';
+  currentPhotoBase64 = '';
+  document.getElementById('fileLabel').textContent = "📸 Add Mirror Selfie";
+  renderLog();
+  updateProgress();
+}
+
+function renderLog() {
+  const hist = document.getElementById('logHistory');
+  hist.innerHTML = '';
+  weightLogs.forEach((log, index) => {
+    hist.innerHTML += `
+      <div class="log-item">
+        <img src="${log.img || ''}" class="log-img" onclick="openModal('${log.img}')" onerror="this.style.display='none'">
+        <div class="log-info">
+          <span class="log-date">${log.date}</span>
+          <span class="log-weight">${log.kg} kg</span>
+        </div>
+        <button onclick="deleteLog(${index})" style="border:none; background:none; font-size:18px; cursor:pointer;">×</button>
+      </div>
+    `;
+  });
+  
+  // Update Dash Preview
+  if(weightLogs.length > 0 && weightLogs[0].img) {
+      document.getElementById('latestPhotoPreview').style.display = 'block';
+      document.getElementById('dashImg').src = weightLogs[0].img;
+  }
+}
+
+function openModal(src) {
+  if(!src) return;
+  document.getElementById('photoModal').style.display = 'flex';
+  document.getElementById('modalImg').src = src;
+}
+
+function deleteLog(i) {
+  if(confirm("Delete this entry?")) {
+    weightLogs.splice(i, 1);
+    localStorage.setItem('v26_logs', JSON.stringify(weightLogs));
+    renderLog();
+    updateProgress();
+  }
+}
+
+function updateProgress() {
+  if(weightLogs.length < 1) return;
+  const latest = weightLogs[0].kg;
+  const start = weightLogs[weightLogs.length - 1].kg;
+  const diff = (start - latest).toFixed(1);
+  const percent = Math.min(Math.max((diff / 10) * 100, 0), 100);
+  document.getElementById('weightProgress').style.width = percent + '%';
+  document.getElementById('weightStatus').textContent = `${diff}kg down. ${10-diff > 0 ? (10-diff).toFixed(1)+'kg to go!' : 'Goal Reached! 🔥'}`;
+}
+
+// PUSH UPS (Preserved)
+const puSchedule = [10,12,15,0,18,20,22,0,25,28,30,0,32,35,40,0,45,50,55,60,75];
 let puData = JSON.parse(localStorage.getItem('v26_pu') || '[]');
 function renderPU() {
   const grid = document.getElementById('puGrid'); grid.innerHTML = '';
-  let row;
   puSchedule.forEach((reps, i) => {
-    if(i % 7 === 0) { row = document.createElement('div'); row.className = 'pu-row'; grid.appendChild(row); }
     const isDone = puData.includes(i);
     const cell = document.createElement('div');
-    cell.className = `pu-cell ${isDone ? 'done' : ''}`;
-    cell.innerHTML = reps === 0 ? '☕' : `<div style="font-size:9px;opacity:0.5;">${i+1}</div><div style="font-weight:800;">${reps}</div>`;
+    cell.style = `aspect-ratio:1; background:${isDone?'var(--ink)':'white'}; color:${isDone?'white':'var(--ink)'}; border:1.5px solid var(--border); border-radius:8px; display:flex; flex-direction:column; align-items:center; justify-content:center; cursor:pointer; font-size:12px;`;
+    cell.innerHTML = reps === 0 ? '☕' : `<span style="font-size:8px; opacity:0.5">${i+1}</span><strong>${reps}</strong>`;
     cell.onclick = () => {
       if(puData.includes(i)) puData = puData.filter(d => d !== i); else puData.push(i);
       localStorage.setItem('v26_pu', JSON.stringify(puData)); renderPU();
     };
-    row.appendChild(cell);
+    grid.appendChild(cell);
   });
 }
 
-// Weight Log
-let weightLogs = JSON.parse(localStorage.getItem('v26_weights') || '[]');
-function addWeight() {
-  const val = document.getElementById('weightInput').value; if(!val) return;
-  weightLogs.unshift({ date: new Date().toLocaleDateString(), kg: parseFloat(val) });
-  localStorage.setItem('v26_weights', JSON.stringify(weightLogs));
-  document.getElementById('weightInput').value = ''; renderWeights();
-}
+function resetAllData() { if(confirm("This wipes EVERYTHING. Weight, photos, and pushups. Ready?")) { localStorage.clear(); location.reload(); } }
 
-function renderWeights() {
-  const list = document.getElementById('weightList'); list.innerHTML = '';
-  weightLogs.forEach(log => {
-    list.innerHTML += `<li style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border);font-size:14px;"><span>${log.date}</span><strong>${log.kg} kg</strong></li>`;
-  });
-  if(weightLogs.length > 0) {
-    const diff = (weightLogs[weightLogs.length-1].kg - weightLogs[0].kg).toFixed(1);
-    const pct = Math.min(Math.max((diff / 10) * 100, 0), 100);
-    document.getElementById('weightProgress').style.width = pct + '%';
-    document.getElementById('weightStatus').textContent = `${diff}kg lost of 10kg goal (${pct.toFixed(1)}%)`;
-  }
-}
-
-renderPU(); renderWeights();
+// INIT
+randomizeAll();
+renderLog();
+renderPU();
+updateProgress();
 </script>
 </body>
 </html>
